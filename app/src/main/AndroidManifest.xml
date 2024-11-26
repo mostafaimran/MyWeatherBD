@@ -15,7 +15,7 @@
         tools:node="remove" />
 
     <application
-        android:name=".TravelaApp"
+        android:name=".MyWeatherBD"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -23,7 +23,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TravelaPropertyListing"
+        android:theme="@style/Theme.MyWeatherBD"
         tools:targetApi="31">
 
         <meta-data
@@ -31,9 +31,9 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name=".ui.screen.PropertyListActivity"
+            android:name=".ui.screen.MyWeatherBDActivity"
             android:exported="true"
-            android:theme="@style/Theme.TravelaPropertyListing">
+            android:theme="@style/Theme.MyWeatherBD">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

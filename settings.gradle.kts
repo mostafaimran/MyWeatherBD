@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TravelaPropertyListing"
+rootProject.name = "MyWeatherBD"
 include(":app")
  

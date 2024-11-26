@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -7,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.travela.propertylisting"
+    namespace = "com.my.weather.bd"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.travela.propertylisting"
+        applicationId = "com.my.weather.bd"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -21,6 +23,23 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        val properties = Properties()
+        val apiKey: String
+
+        val localPropertiesFile = project.rootProject.file("local.properties")
+        apiKey = if (localPropertiesFile.exists()) {
+            properties.load(localPropertiesFile.inputStream())
+            properties.getProperty("API_KEY") ?: ""
+        } else {
+            System.getenv("API_KEY") ?: ""
+        }
+
+        buildConfigField(
+            "String",
+            "API_KEY",
+            "\"$apiKey\""
+        )
     }
 
     buildTypes {
@@ -41,6 +60,8 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
+
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.15"

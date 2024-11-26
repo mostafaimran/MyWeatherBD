@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TravelaPropertyListing</string>
+    <string name="app_name">My Weather BD</string>
     <string name="taka_sign">&#2547; %d</string>
     <string name="bdt_price">BDT %d /Day</string>
     <string name="location_permission_issue">Location permission required to access the app</string>
