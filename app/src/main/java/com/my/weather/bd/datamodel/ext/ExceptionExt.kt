@@ -1,7 +1,5 @@
 package com.my.weather.bd.datamodel.ext
 
-import android.content.Context
-import com.my.weather.bd.R
 import com.my.weather.bd.datamodel.exceptions.ClientRequestException
 import com.my.weather.bd.datamodel.exceptions.HttpServerException
 import com.my.weather.bd.datamodel.exceptions.LocalException
@@ -38,20 +36,4 @@ fun Exception.isServerError(): Boolean {
 
 fun Exception.isClientRequestError(): Boolean {
     return if (this is HttpException && (this.code() in 400..499)) return true else false
-}
-
-fun Exception.getErrorMessage(context: Context): String {
-    return when (this) {
-        is NetworkException -> {
-            return context.getString(R.string.network_error_message)
-        }
-
-        is ServerException -> {
-            return context.getString(R.string.server_error_message)
-        }
-
-        else -> {
-            return context.getString(R.string.local_error_message)
-        }
-    }
 }

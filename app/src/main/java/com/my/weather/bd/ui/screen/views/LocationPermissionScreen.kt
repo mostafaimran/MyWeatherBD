@@ -3,23 +3,33 @@ package com.my.weather.bd.ui.screen.views
 import android.Manifest
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.google.android.gms.maps.model.LatLng
+import com.my.weather.bd.R
 import com.my.weather.bd.datamodel.ext.getCurrentLocation
 import com.my.weather.bd.datamodel.ext.hasLocationPermission
-import com.my.weather.bd.datamodel.models.Location
 
 
 @Composable
-fun LocationPermissionScreen(onLocationFound: (Location) -> Unit, permissionDenied: () -> Unit) {
+fun LocationPermissionScreen(onLocationFound: (LatLng) -> Unit, permissionDenied: () -> Unit) {
     val context = LocalContext.current
 
     var requestLocationPermission by remember { mutableStateOf(false) }
@@ -35,22 +45,13 @@ fun LocationPermissionScreen(onLocationFound: (Location) -> Unit, permissionDeni
                 if (permissionsGranted) {
                     // Permission granted, update the location
                     context.getCurrentLocation { lat, long ->
-                        onLocationFound(Location(lat, long))
+                        onLocationFound(LatLng(lat, long))
                     }
                 } else {
                     permissionDenied()
                 }
             }
         )
-
-    /*LaunchedEffect(requestLocationPermission) {
-        requestPermissionLauncher.launch(
-            arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-            )
-        )
-    }*/
 
     val lifecycleOwner = LocalLifecycleOwner.current
     DisposableEffect(key1 = lifecycleOwner, effect = {
@@ -73,10 +74,24 @@ fun LocationPermissionScreen(onLocationFound: (Location) -> Unit, permissionDeni
     if (context.hasLocationPermission()) {
         // Permission already granted, update the location
         context.getCurrentLocation { lat, long ->
-            onLocationFound(Location(lat, long))
+            onLocationFound(LatLng(lat, long))
         }
     } else {
         // Request location permission
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Text(
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .padding(horizontal = 16.dp, vertical = 24.dp),
+                text = stringResource(R.string.location_permission_caption),
+                style = MaterialTheme.typography.headlineSmall
+            )
+        }
+
 
         requestLocationPermission = true
     }
