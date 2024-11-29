@@ -3,7 +3,7 @@ package com.my.weather.bd.ui.screen.views
 import android.Manifest
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -79,19 +80,19 @@ fun LocationPermissionScreen(onLocationFound: (LatLng) -> Unit, permissionDenied
     } else {
         // Request location permission
 
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 24.dp),
+
         ) {
             Text(
-                modifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .padding(horizontal = 16.dp, vertical = 24.dp),
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                textAlign = TextAlign.Center,
                 text = stringResource(R.string.location_permission_caption),
                 style = MaterialTheme.typography.headlineSmall
             )
         }
-
 
         requestLocationPermission = true
     }
