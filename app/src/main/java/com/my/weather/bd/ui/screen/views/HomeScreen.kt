@@ -1,10 +1,15 @@
 package com.my.weather.bd.ui.screen.views
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -13,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.my.weather.bd.R
@@ -30,7 +36,12 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(R.string.app_name)) }
+                title = { Text(text = stringResource(R.string.app_name)) },
+                actions = {
+                    IconButton(onClick = onSearchClicked) {
+                        Icon(Icons.Default.Search, contentDescription = "Search")
+                    }
+                }
             )
         }
     ) { innerPadding ->
@@ -61,15 +72,21 @@ fun HomeScreen(
                         onException()
                     } else {
                         weatherResponse?.let { response ->
-                            WeatherScreen(
-                                cityName = response.name ?: "",
-                                temperature = response.main.temp,
-                                description = response.weather.firstOrNull()?.description ?: "",
-                                weatherIcon = response.weather.firstOrNull()?.icon ?: "",
-                                pressure = response.main.pressure,
-                                feelsLike = response.main.feelsLike,
-                                humidity = response.main.humidity
-                            )
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(16.dp)
+                            ) {
+                                WeatherScreen(
+                                    cityName = response.name ?: "",
+                                    temperature = response.main.temp,
+                                    description = response.weather.firstOrNull()?.description ?: "",
+                                    weatherIcon = response.weather.firstOrNull()?.icon ?: "",
+                                    pressure = response.main.pressure,
+                                    feelsLike = response.main.feelsLike,
+                                    humidity = response.main.humidity
+                                )
+                            }
                         } ?: run {
                             viewModel.getWeatherByLocation(
                                 currentLocation.latitude,

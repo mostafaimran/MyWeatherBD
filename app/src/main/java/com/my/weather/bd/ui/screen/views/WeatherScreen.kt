@@ -41,31 +41,9 @@ fun WeatherScreen(
     humidity: Int
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
-        OutlinedTextField(
-            value = "",
-            onValueChange = {
-
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp),
-            placeholder = { Text("Search Location") },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Search Icon"
-                )
-            },
-            shape = RoundedCornerShape(24.dp),
-            singleLine = true
-        )
-
         val iconUrl =
             "${ServerConstants.ICON_URL_PREFIX}$weatherIcon${ServerConstants.ICON_URL_SUFFIX}"
 

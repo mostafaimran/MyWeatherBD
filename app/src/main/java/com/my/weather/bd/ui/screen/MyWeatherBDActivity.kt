@@ -7,7 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import com.my.weather.bd.R
-import com.my.weather.bd.ui.screen.views.HomeScreen
+import com.my.weather.bd.ui.screen.views.AppNavigation
 import com.my.weather.bd.ui.theme.WeatherTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,10 +20,7 @@ class MyWeatherBDActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherTheme {
-                HomeScreen(
-                    onSearchClicked = {
-
-                    },
+                AppNavigation(
                     onException = {
                         Toast.makeText(
                             this,
