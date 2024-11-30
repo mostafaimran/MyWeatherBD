@@ -1,4 +1,4 @@
-package com.my.weather.bd.ui.screen.views
+package com.my.weather.bd.ui.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.my.weather.bd.datamodel.ext.getLogDateFormat
-import com.my.weather.bd.ui.screen.LogData
+import com.my.weather.bd.ui.viewmodel.LogData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

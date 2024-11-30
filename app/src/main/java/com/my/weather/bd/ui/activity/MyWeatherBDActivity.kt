@@ -1,4 +1,4 @@
-package com.my.weather.bd.ui.screen
+package com.my.weather.bd.ui.activity
 
 import android.os.Bundle
 import android.widget.Toast
@@ -7,8 +7,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import com.my.weather.bd.R
-import com.my.weather.bd.ui.screen.views.AppNavigation
-import com.my.weather.bd.ui.theme.WeatherTheme
+import com.my.weather.bd.ui.screen.AppNavigation
+import com.my.weather.bd.core.base.theme.WeatherTheme
+import com.my.weather.bd.ui.viewmodel.WeatherBDViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

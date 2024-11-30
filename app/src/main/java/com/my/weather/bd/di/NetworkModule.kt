@@ -1,5 +1,6 @@
 package com.my.weather.bd.di
 
+import com.google.gson.Gson
 import com.my.weather.bd.data.ServerConstants
 import com.my.weather.bd.data.network.OpenWeatherAPI
 import dagger.Module

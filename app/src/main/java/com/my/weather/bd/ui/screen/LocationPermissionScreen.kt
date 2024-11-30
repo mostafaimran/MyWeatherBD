@@ -1,4 +1,4 @@
-package com.my.weather.bd.ui.screen.views
+package com.my.weather.bd.ui.screen
 
 import android.Manifest
 import androidx.activity.compose.rememberLauncherForActivityResult

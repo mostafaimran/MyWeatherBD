@@ -1,4 +1,4 @@
-package com.my.weather.bd.ui.screen.views
+package com.my.weather.bd.ui.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,16 +19,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.my.weather.bd.R
 import com.my.weather.bd.datamodel.ext.getCurrentLocation
-import com.my.weather.bd.ui.screen.WeatherBDViewModel
+import com.my.weather.bd.ui.viewmodel.WeatherBDViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    viewModel: WeatherBDViewModel = hiltViewModel(),
+    viewModel: WeatherBDViewModel,
     onSearchClicked: () -> Unit,
     onException: () -> Unit,
     onPermissionDenied: () -> Unit
@@ -50,7 +49,7 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            val uiState = viewModel.uiState
+            val uiState = viewModel.weatherScreenState
             val requestLocationPermission = uiState.locationPermissionRequired
             val weatherResponse = uiState.weatherResponse
             val currentLocation = uiState.currentLocation

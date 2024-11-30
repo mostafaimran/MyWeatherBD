@@ -17,4 +17,5 @@
     <string name="pressure">Pressure</string>
     <string name="humidity">Humidity</string>
     <string name="search_location">Search Location</string>
+    <string name="search_zila">Search Zila Weather</string>
 </resources>

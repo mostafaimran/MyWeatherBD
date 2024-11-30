@@ -1,4 +1,4 @@
-package com.my.weather.bd.ui.theme
+package com.my.weather.bd.core.base.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -1,4 +1,4 @@
-package com.my.weather.bd.ui.theme
+package com.my.weather.bd.core.base.theme
 
 import androidx.compose.ui.graphics.Color
 
