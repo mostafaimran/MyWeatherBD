@@ -27,7 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.my.weather.bd.R
-import com.my.weather.bd.datamodel.models.Zila
 import com.my.weather.bd.ui.viewmodel.WeatherBDViewModel
 
 
@@ -66,36 +65,44 @@ fun SearchScreen(
                 viewModel.getZilaList()
             }
 
+            val searchText = remember { mutableStateOf("") }
+
             val allZilaList = searchScreenState.zilaList ?: ArrayList()
-
-            val zilaList = remember { mutableListOf<Zila>() }
-            zilaList.clear()
-            zilaList.addAll(allZilaList)
-
-            SearchBarView { text ->
-                val filterList = allZilaList.filter { it.name.contains(text, ignoreCase = true) }
-
-                if (filterList.isNotEmpty()) {
-                    zilaList.clear()
-                    zilaList.addAll(filterList)
-                } else {
-                    zilaList.clear()
-                    zilaList.addAll(allZilaList)
-                }
+            val filteredItems = allZilaList.filter { zila ->
+                zila.name.contains(searchText.value, ignoreCase = true)
             }
 
-            if (zilaList.isNotEmpty())
+            OutlinedTextField(
+                value = searchText.value,
+                onValueChange = {
+                    searchText.value = it
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
+                placeholder = { Text(stringResource(R.string.search_location)) },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search Icon"
+                    )
+                },
+                shape = RoundedCornerShape(24.dp),
+                singleLine = true
+            )
+
+            if (filteredItems.isNotEmpty())
                 LazyColumn {
-                    items(zilaList.size) { index ->
+                    items(filteredItems.size) { index ->
                         Column(modifier = Modifier.clickable {
                             viewModel.getWeatherByLocation(
-                                zilaList[index].coord.lat,
-                                zilaList[index].coord.lon
+                                filteredItems[index].coord.lat,
+                                filteredItems[index].coord.lon
                             )
                             onBack()
                         }) {
                             Spacer(Modifier.size(8.dp))
-                            Text(zilaList[index].name)
+                            Text(filteredItems[index].name)
                             Spacer(Modifier.size(8.dp))
                             HorizontalDivider()
                         }
@@ -105,27 +112,3 @@ fun SearchScreen(
     }
 }
 
-@Composable
-fun SearchBarView(onValueChange: (String) -> Unit) {
-    val searchText = remember { mutableStateOf("") }
-
-    OutlinedTextField(
-        value = searchText.value,
-        onValueChange = {
-            searchText.value = it
-            onValueChange(it)
-        },
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 16.dp),
-        placeholder = { Text(stringResource(R.string.search_location)) },
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = "Search Icon"
-            )
-        },
-        shape = RoundedCornerShape(24.dp),
-        singleLine = true
-    )
-}
