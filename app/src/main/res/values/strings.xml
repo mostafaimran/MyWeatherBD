@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">My Weather BD</string>
-    <string name="taka_sign">&#2547; %d</string>
-    <string name="bdt_price">BDT %d /Day</string>
     <string name="location_permission_issue">Location permission required to access the app, Thanks!</string>
     <string name="location_permission_caption">Location permission required to access the app</string>
     <string name="local_error_message">Something went wrong, please try again later</string>
@@ -17,5 +15,5 @@
     <string name="pressure">Pressure</string>
     <string name="humidity">Humidity</string>
     <string name="search_location">Search Location</string>
-    <string name="search_zila">Search Zila Weather</string>
+    <string name="search_zila">Search Zila</string>
 </resources>

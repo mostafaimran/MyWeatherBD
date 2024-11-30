@@ -57,17 +57,17 @@ fun WeatherScreen(
         // City Name and Temperature
         Text(
             text = cityName,
-            style = MaterialTheme.typography.headlineSmall,
+            style = MaterialTheme.typography.headlineLarge,
             modifier = Modifier.padding(top = 8.dp)
         )
         Text(
             text = "${temperature.toCelsius()}$tempCelsius",
-            style = MaterialTheme.typography.displaySmall,
+            style = MaterialTheme.typography.displayMedium,
             modifier = Modifier.padding(top = 8.dp)
         )
         Text(
             text = description,
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(top = 8.dp)
         )
 
