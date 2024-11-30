@@ -1,5 +1,6 @@
 package com.my.weather.bd.ui.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -79,7 +80,11 @@ fun SearchScreen(
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 16.dp),
+                    .padding(bottom = 16.dp)
+                    .background(
+                        MaterialTheme.colorScheme.surfaceContainer,
+                        RoundedCornerShape(24.dp)
+                    ),
                 placeholder = { Text(stringResource(R.string.search_location)) },
                 leadingIcon = {
                     Icon(
@@ -102,7 +107,10 @@ fun SearchScreen(
                             onBack()
                         }) {
                             Spacer(Modifier.size(16.dp))
-                            Text(filteredItems[index].name, style = MaterialTheme.typography.bodyLarge)
+                            Text(
+                                filteredItems[index].name,
+                                style = MaterialTheme.typography.bodyLarge
+                            )
                             Spacer(Modifier.size(16.dp))
                             HorizontalDivider()
                         }
